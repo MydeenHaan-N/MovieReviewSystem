@@ -3,48 +3,41 @@ import { useAuth } from '../contexts/AuthContext';
 import ReviewForm from './ReviewForm';
 import ReviewList from './ReviewList';
 import { Link } from 'react-router-dom';
-import { Film, LogOut, User, Sparkles, Star } from 'lucide-react';
+import { Film, LogOut, User, Sparkles, Star, PenSquare } from 'lucide-react';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
       {/* Header */}
-      <header className="relative border-b border-white/10 backdrop-blur-sm bg-black/20">
-        <div className="container mx-auto px-4 py-6">
+      <header className="bg-white border-b border-amber-200 shadow-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-2 rounded-xl shadow-lg">
-                <Film className="w-8 h-8 text-white" />
+              <div className="bg-gradient-to-br from-amber-500 to-orange-600 p-2.5 rounded-xl shadow-md">
+                <Film className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-                  CineReviews
+                <h1 className="text-2xl font-bold text-gray-900">
+                  Movie Reviews
                 </h1>
-                <p className="text-sm text-gray-400">Share your movie experiences</p>
+                <p className="text-xs text-gray-600">Share your cinematic journey</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <div className="hidden md:flex items-center space-x-2 bg-white/5 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-                <User className="w-5 h-5 text-purple-400" />
-                <span className="text-gray-300 text-sm">{user?.email}</span>
+            <div className="flex items-center space-x-3">
+              <div className="hidden md:flex items-center space-x-2 bg-amber-50 px-4 py-2 rounded-lg border border-amber-200">
+                <User className="w-4 h-4 text-amber-600" />
+                <span className="text-gray-700 text-sm font-medium">{user?.email}</span>
               </div>
               <button
                 onClick={logout}
-                className="group flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-600 text-white px-5 py-2.5 rounded-full hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300 hover:scale-105"
+                className="group flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg"
               >
                 <LogOut className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                <span className="font-medium">Logout</span>
+                <span className="font-medium text-sm">Logout</span>
               </button>
             </div>
           </div>
@@ -52,53 +45,92 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="relative container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 bg-purple-500/10 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-500/20 mb-4">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">Your Movie Journey</span>
+      <main className="container mx-auto px-4 py-8">
+        {/* Welcome Section */}
+        <div className="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-8 mb-8 shadow-lg text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full mb-3">
+                <Sparkles className="w-4 h-4" />
+                <span className="text-sm font-medium">Welcome Back</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                Ready to Share Your Thoughts?
+              </h2>
+              <p className="text-amber-50 text-sm md:text-base max-w-2xl">
+                Discover amazing films and share your reviews with the community
+              </p>
+            </div>
+            <div className="hidden lg:block">
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                <Star className="w-16 h-16 text-amber-200" />
+              </div>
+            </div>
           </div>
-          <h2 className="text-5xl font-bold text-white mb-4">
-            Discover & Review
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Share your thoughts on the latest films and explore reviews from fellow movie enthusiasts
-          </p>
         </div>
 
         {/* Add Review Button */}
         <div className="flex justify-center mb-8">
           <button
             onClick={() => setShowForm(!showForm)}
-            className="group relative bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 overflow-hidden"
+            className="group bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-amber-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative flex items-center space-x-3">
-              <Star className="w-6 h-6" />
-              <span>{showForm ? 'Hide Review Form' : 'Write a Review'}</span>
+            <div className="flex items-center space-x-2.5">
+              {showForm ? (
+                <>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span>Hide Review Form</span>
+                </>
+              ) : (
+                <>
+                  <PenSquare className="w-5 h-5" />
+                  <span>Write a Review</span>
+                </>
+              )}
             </div>
           </button>
         </div>
 
         {/* Review Form */}
         {showForm && (
-          <div className="mb-12 transform transition-all duration-500 animate-in fade-in slide-in-from-top-4">
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
+          <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+            <div className="bg-white rounded-2xl p-6 md:p-8 border border-amber-200 shadow-lg">
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-600 p-2 rounded-lg">
+                  <PenSquare className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900">Create New Review</h3>
+              </div>
               <ReviewForm />
             </div>
           </div>
         )}
 
         {/* Reviews Section */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-2 rounded-lg">
-              <Film className="w-5 h-5 text-white" />
+        <div className="bg-white rounded-2xl p-6 md:p-8 border border-amber-200 shadow-lg">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-3">
+              <div className="bg-gradient-to-br from-amber-500 to-orange-600 p-2 rounded-lg">
+                <Film className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">All Reviews</h3>
+                <p className="text-sm text-gray-600">Community ratings and reviews</p>
+              </div>
             </div>
-            <h3 className="text-2xl font-bold text-white">Latest Reviews</h3>
+            
+            {/* Stats Badge */}
+            <div className="hidden sm:flex items-center space-x-2 bg-amber-50 px-4 py-2 rounded-lg border border-amber-200">
+              <Star className="w-4 h-4 text-amber-600" />
+              <span className="text-sm font-semibold text-gray-700">Latest</span>
+            </div>
           </div>
-          <ReviewList />
+          
+          <div className="border-t border-gray-200 pt-6">
+            <ReviewList />
+          </div>
         </div>
       </main>
     </div>

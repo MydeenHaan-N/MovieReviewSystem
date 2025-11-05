@@ -21,7 +21,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/movies', movieRoutes);
 
 // Sync DB and seed default user (use alter: true for dev to add columns)
-sequelize.sync({ alter: false }).then(async () => {
+sequelize.sync({ alter:false }).then(async () => {
   await seedDefaultUser();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }).catch(err => console.error('DB sync error:', err));
